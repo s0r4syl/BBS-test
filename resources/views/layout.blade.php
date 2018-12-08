@@ -25,6 +25,11 @@
 	    <a class="navbar-brand" href="{{ url('/') }}">
 		BBS
 	    </a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!-- Left Side Of Navbar -->
+                    <ul class="navbar-nav mr-auto">
+
+                    </ul>
 
 		<!-- Authentication Links -->
 		@guest
@@ -55,7 +60,7 @@
 			</div>
 		    </li>
 		@endguest
-
+                </div>
 	</div>
     </nav>
 
