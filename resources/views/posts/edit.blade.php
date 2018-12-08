@@ -12,11 +12,12 @@
                 @method('PUT')
 
                 <fieldset class="mb-4">
-                    <div class="form-group">
+		    <div class="form-group">
                         <label for="title">
                             タイトル
-                        </label>
-                        <input
+			</label>
+                        <p>{{ $post->title }}</p>
+			{{--<input
                             id="title"
                             name="title"
                             class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}"
@@ -28,7 +29,7 @@
                                 {{ $errors->first('title') }}
                             </div>
                         @endif
-                    </div>
+                    </div>--}}
 
                     <div class="form-group">
                         <label for="body">
@@ -49,13 +50,14 @@
                     </div>
 
                     <div class="mt-5">
+                        <button type="submit" class="btn btn-primary">
+                            更新
+                        </button>
+
                         <a class="btn btn-secondary" href="{{ route('posts.show', ['post' => $post]) }}">
                             キャンセル
                         </a>
 
-                        <button type="submit" class="btn btn-primary">
-                            更新
-                        </button>
                     </div>
                 </fieldset>
             </form>

@@ -4,15 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\User;
 
 class PostsController extends Controller
 {
+    /**
+    * Create a new controller instance.
+    *
+    * @return void
+    */
+    public function __construct()
+    {
+	// すべてのページにログインが必要になる
+        //$this->middleware('auth');
+    }
+
     public function index()
     {
         $posts = Post::with(['comments'])->orderBy('created_at', 'desc')->paginate(10);
 
         return view('posts.index', ['posts' => $posts]);
     }
+
     public function create()
     {
         return view('posts.create');
@@ -23,6 +36,7 @@ class PostsController extends Controller
         $params = $request->validate([
             'title' => 'required|max:50',
             'body' => 'required|max:2000',
+     	    'user_name' => 'required|exists:users,name',
         ]);
 
         Post::create($params);
@@ -40,7 +54,7 @@ class PostsController extends Controller
     public function edit($post_id)
     {
         $post = Post::findOrFail($post_id);
-
+        $this->authorize('edit', $post);	
         return view('posts.edit', [
             'post' => $post,
         ]);
@@ -48,11 +62,14 @@ class PostsController extends Controller
     public function update($post_id, Request $request)
     {
     	$params = $request->validate([
-            'title' => 'required|max:50',
+            /*'title' => 'required|max:50',*/
 	    'body' => 'required|max:2000',
         ]);
 
         $post = Post::findOrFail($post_id);
+
+        $this->authorize('update', $post);
+
         $post->fill($params)->save();
 
         return redirect()->route('posts.show', ['post' => $post]);
@@ -60,6 +77,8 @@ class PostsController extends Controller
     public function destroy($post_id)
     {
         $post = Post::findOrFail($post_id);
+
+	$this->authorize('destroy', $post);
 
         \DB::transaction(function () use ($post) {
             $post->comments()->delete();

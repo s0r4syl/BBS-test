@@ -37,7 +37,7 @@
                           id="body"
                           name="body"
                           class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}"
-                          rows="4"
+                          rows="8"
                       >{{ old('body') }}</textarea>
                       @if ($errors->has('body'))
                           <div class="invalid-feedback">
@@ -45,15 +45,21 @@
                           </div>
                       @endif
                   </div>
-
+		  {{-- 隠し要素で投稿者を送信 --}}
+                  <div class="form-group">
+                      <input
+                          name="user_name"
+			  type="hidden"
+			  value="{{ Auth::user()->name }}"
+                      >
+                  </div>
                   <div class="mt-5">
-                      <a class="btn btn-secondary" href="{{ route('top') }}">
-                          キャンセル
-                      </a>
-
                       <button type="submit" class="btn btn-primary">
                           投稿
                       </button>
+                      <a class="btn btn-secondary" href="{{ route('top') }}">
+                          取り消し
+                      </a>
                   </div>
               </fieldset>
           </form>

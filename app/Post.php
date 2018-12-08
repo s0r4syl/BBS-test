@@ -9,7 +9,13 @@ class Post extends Model
     protected $fillable = [
         'title',
         'body',
+	'user_name',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 
     public function comments()
     {

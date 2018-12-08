@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">
-                        {!! nl2br(e(str_limit($post->body, 200))) !!} ...
+                        {!! nl2br(e(str_limit($post->body, 200))) !!} <br>
                     </p>
 		    {{--  投稿の詳細画面へのリンク --}}
 		    <a class="card-link" href="{{ route('posts.show', ['post' => $post]) }}">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="mr-2">
-                        投稿日時 {{ $post->created_at->format('Y.m.d') }}
+                        Created by {{ $post->user_name }} at {{ $post->created_at->format('Y.m.d H:m:s') }}.
                     </span>
 
                     @if ($post->comments->count())
