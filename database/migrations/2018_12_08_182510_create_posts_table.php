@@ -22,7 +22,6 @@ class CreatePostsTable extends Migration
 
 	    $table->foreign('user_name')->references('name')->on('users');
         });
-	DB::statement('ALTER TABLE broads ADD FULLTEXT index content (`body`) with parser ngram');
     }
 
     /**

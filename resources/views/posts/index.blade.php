@@ -23,7 +23,7 @@
                 </div>
                 <div class="card-footer">
                     <span class="mr-2">
-                        Created by {{ $post->user_name }} at {{ $post->created_at->format('Y.m.d H:m:s') }}.
+                        Created by {{ $post->user_name }} at {{ $post->created_at->format('Y.m.d H:m:s') }}
                     </span>
 
                     @if ($post->comments->count())

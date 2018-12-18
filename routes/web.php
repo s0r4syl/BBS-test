@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('laravel-bbs', 'PostsController@index')->name('top');
+Route::get('/', 'PostsController@index')->name('top');
 Route::resource('posts', 'PostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']])->middleware('auth');
 Route::resource('comments', 'CommentsController', ['only' => ['store']]);
 
